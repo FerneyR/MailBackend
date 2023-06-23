@@ -6,17 +6,14 @@ const app = express();
 const port = 8080;
 const router = require('./src/routes');
 
-app.use(cors({
-    origin: ['http://localhost:3000'],
-    optionsSuccessStatus: 200
-}));
+app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(router);
 
-app.get('/', async (req, res) => {
+app.get('/', async (req, res) => {s
   res.send("Proyecto Post Office.");
 });
 
