@@ -20,7 +20,7 @@ app.use(bodyParser.json())
 app.use(router);
 
 app.get('/', async (req, res) => {
-    res.send("Microservicio para MaxMail v1.0.0")
+    res.send("Proyecto Post Office.")
 });
 
 app.listen(port, () => {
