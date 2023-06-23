@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { db } = require('../firebase/firebaseConfig')
 const { doc, getDocs,query,where , setDoc,collection } = require("firebase/firestore");
 
-const usersRef = collection(db, "users");
+const usersRef = collection(db, "Users");
 
 
 router.route('/validateUser/:email').get((req, res) => {
