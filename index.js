@@ -6,7 +6,10 @@ const app = express();
 const port = 8080;
 const router = require('./src/routes');
 
-app.use(cors()); // Habilitar CORS para todas las rutas
+app.use(cors({
+    origin: ['http://localhost:3000'],
+    optionsSuccessStatus: 200
+}));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
