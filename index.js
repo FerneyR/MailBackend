@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const { createProxyMiddleware } = require("http-proxy-middleware");
+const axios = require("axios");
 
 const app = express();
 const port = 8080;
@@ -12,18 +12,20 @@ app.use(cors()); // Habilitar CORS para todas las rutas
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// Configurar el proxy inverso
-const apiProxy = createProxyMiddleware("/get", {
-  target: "https://hammerhead-app-bc22e.ondigitalocean.app",
-  changeOrigin: true,
-});
-
-app.use("/get", apiProxy);
-
 app.use(router);
 
 app.get("/", async (req, res) => {
   res.send("Proyecto Post Office.");
+});
+
+app.get("/api", async (req, res) => {
+  const url = "https://hammerhead-app-bc22e.ondigitalocean.app/get/mailbox/inbox/max123@maxmail.com";
+  try {
+    const response = await axios.get(`https://cors-anywhere.herokuapp.com/${url}`);
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).json({ error: "Error al obtener los datos." });
+  }
 });
 
 app.listen(port, () => {
